@@ -4,6 +4,12 @@ import java.math.BigInteger;
 
 public class StringOperations {
 
+    public static final String LOWERCASE_LETTERS = "[a-z]";
+    public static final String UPPERCASE_LETTERS = "[A-Z]";
+    public static final String DELIMITER_BY_WORDS = "[^A-Za-zА-Яа-я]+";
+    public static final String WHITESPACES = "\\s";
+    public static final String EXTRA_SPACES = "\\s{2,}";
+
     public static void main(String[] args) {
 
         EvenOddPair pair = splitEvenOddChars("WHoerllldo");
@@ -71,8 +77,8 @@ public class StringOperations {
     }
 
     public static double percentageLowerUppercase(String source) {
-        String lowercaseRemoved = source.replaceAll("[a-z]", "");
-        String uppercaseRemoved = source.replaceAll("[A-Z]", "");
+        String lowercaseRemoved = source.replaceAll(LOWERCASE_LETTERS, "");
+        String uppercaseRemoved = source.replaceAll(UPPERCASE_LETTERS, "");
 
         double lowercaseCount = source.length() - lowercaseRemoved.length();
         double uppercaseCount = source.length() - uppercaseRemoved.length();
@@ -96,14 +102,10 @@ public class StringOperations {
     }
 
     public static int calcCharsQuantity(String source, char neededChar) {
-        int charsQuantity = 0;
+        String ch = Character.toString(neededChar);
+        String charsReplaced = source.replace(ch, "");
 
-        String c = Character.toString(neededChar);
-        String s = source.replace(c, "");
-
-        charsQuantity = source.length() - s.length();
-
-        return charsQuantity;
+        return source.length() - charsReplaced.length();
     }
 
     public static String reverseString(String original) {
@@ -152,7 +154,7 @@ public class StringOperations {
     }
 
     public static String replaceWhitespaces(String original) {
-        return original.replaceAll("\\s", "*");
+        return original.replaceAll(WHITESPACES, "*");
     }
 
     public static String replaceLongestWordChars(String original) {
@@ -256,11 +258,11 @@ public class StringOperations {
     }
 
     public static String removeExtraSpaces(String original) {
-        return original.replaceAll("\\s{2,}", " ").trim();
+        return original.replaceAll(EXTRA_SPACES, " ").trim();
     }
 
     public static String[] wordsFromString(String source) {
-        return source.trim().split("[^A-Za-zА-Яа-я]+");
+        return source.trim().split(DELIMITER_BY_WORDS);
     }
 
 }
